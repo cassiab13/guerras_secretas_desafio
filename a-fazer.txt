@@ -1,0 +1,29 @@
+OK Salvar criadores 
+OK Salvar personagens
+OK Salvar revistas
+
+OK Verificar uma forma para não duplicar os dados
+
+5. Rotas Auxiliares: Deverão ser criadas pelo menos 5 rotas auxiliares para complementar a funcionalidade de sua aplicação. O que cada rota irá fazer fica a seu critério.
+Exemplos: Rota para listar somente os roteiristas, uma rota para buscar todas as personagens do sexo feminino de determinada sagas, uma rota para contar o total de revistas de derminada saga, e assim por diante.
+OK Retornar as revistas de um criador específico
+Ok Retornar as revistas que um personagem apareceu
+OK Retornar os eventos que um personagem participou
+OK Retornar a thumbnail de um personagem
+
+
+6. Desenvolvimento de Testes:
+Testes Automatizados: Escreva testes unitários e de integração para garantir o correto funcionamento das operações CRUD e da lógica de negócios da sua API.
+Testes End-to-End (E2E): Implemente testes E2E para simular o fluxo completo de uso da sua API, desde a requisição inicial até a resposta final.
+Teste de Carga: Realize um teste de carga para avaliar a performance e a estabilidade da sua API sob condições de uso elevado.
+
+Entregáveis
+Código Fonte da API: Inclua todo o código desenvolvido para a API, organizado e documentado.
+Documentação das Rotas: Forneça uma documentação clara das rotas disponíveis na sua API, incluindo os métodos HTTP suportados e os formatos de requisição/resposta.
+Relatórios de Testes: Apresente os resultados dos testes automatizados, E2E, e de carga, incluindo qualquer ferramenta ou abordagem utilizada para realizá-los.
+A ferramenta Jest gera um relatório de cobertura de testes, sendo assim, a meta é alcançar 90% de cobertura de testes na aplicação.
+
+{
+    "resourceURI": "http://gateway.marvel.com/v1/public/series/2063",
+    "name": "Secret Wars (1984 - 1985)"
+},

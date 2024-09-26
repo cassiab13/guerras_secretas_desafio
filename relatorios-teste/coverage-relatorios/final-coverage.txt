@@ -1,0 +1,129 @@
+---------------------------------------|---------|----------|---------|---------|-------------------------------
+File                                   | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+---------------------------------------|---------|----------|---------|---------|-------------------------------
+All files                              |   91.97 |    79.93 |      92 |   91.97 | 
+ guerras_secretas                      |     100 |    44.44 |     100 |     100 | 
+  config.ts                            |     100 |        0 |     100 |     100 | 5-10
+  redisConfig.ts                       |     100 |      100 |     100 |     100 | 
+  routes.ts                            |     100 |      100 |     100 |     100 | 
+ guerras_secretas/src/adapter          |   68.82 |    45.94 |   65.21 |   68.82 | 
+  character.adapter.ts                 |   65.95 |       40 |   66.66 |   65.95 | 11-26
+  comic-date.adapter.ts                |   57.14 |      100 |       0 |   57.14 | 8-13
+  comic-price.adapter.ts               |   57.14 |      100 |       0 |   57.14 | 8-13
+  comic-text.adapter.ts                |   53.33 |      100 |       0 |   53.33 | 8-14
+  comic.adapter.ts                     |   59.81 |       50 |      75 |   59.81 | 21-61,67-68
+  creator.adapter.ts                   |   63.63 |       40 |   66.66 |   63.63 | 11-30
+  event.adapter.ts                     |   64.81 |       40 |   66.66 |   64.81 | 11-29
+  image.adapter.ts                     |     100 |      100 |     100 |     100 | 
+  serie.adapter.ts                     |     100 |    42.85 |     100 |     100 | 12,34-36
+  storie.adapter.ts                    |    64.7 |       40 |   66.66 |    64.7 | 11-28
+ guerras_secretas/src/controller       |   90.05 |      100 |   83.33 |   90.05 |                               
+  character.controller.ts              |   68.42 |      100 |      50 |   68.42 | 17-22,25-30
+  comic.controller.ts                  |     100 |      100 |     100 |     100 | 
+  creator.controller.ts                |   68.18 |      100 |      50 |   68.18 | 15-21
+  crud.controller.ts                   |     100 |      100 |     100 |     100 | 
+  populate.controller.ts               |     100 |      100 |     100 |     100 | 
+  user.controller.ts                   |     100 |      100 |     100 |     100 | 
+ guerras_secretas/src/dto              |     100 |      100 |     100 |     100 | 
+  auth.user.dto.ts                     |     100 |      100 |     100 |     100 | 
+  create.character.dto.ts              |     100 |      100 |     100 |     100 | 
+  create.creator.dto.ts                |     100 |      100 |     100 |     100 | 
+ guerras_secretas/src/enums            |     100 |      100 |     100 |     100 | 
+  status.code.ts                       |     100 |      100 |     100 |     100 | 
+ guerras_secretas/src/handlers         |   93.69 |    71.42 |     100 |   93.69 | 
+  save-character.handler.ts            |    93.1 |    71.42 |     100 |    93.1 | 36-39
+  save-comic.handler.ts                |   93.22 |    71.42 |     100 |   93.22 | 36-39
+  save-creator.handler.ts              |    93.1 |    71.42 |     100 |    93.1 | 37-40
+  save-event.handler.ts                |   96.55 |    71.42 |     100 |   96.55 | 34-35
+  save-serie.handler.ts                |    93.1 |    71.42 |     100 |    93.1 | 36-39
+  save-storie.handler.ts               |    93.1 |    71.42 |     100 |    93.1 | 36-39                         
+ guerras_secretas/src/managers         |   99.52 |    97.36 |     100 |   99.52 | 
+  character.manager.ts                 |     100 |      100 |     100 |     100 | 
+  comic.manager.ts                     |     100 |      100 |     100 |     100 | 
+  creator.manager.ts                   |     100 |      100 |     100 |     100 | 
+  event.manager.ts                     |     100 |      100 |     100 |     100 | 
+  populate.manager.ts                  |   97.29 |       90 |     100 |   97.29 | 59-60
+  serie.manager.ts                     |     100 |      100 |     100 |     100 |                               
+  storie.manager.ts                    |     100 |      100 |     100 |     100 | 
+ guerras_secretas/src/managers/caching |   94.88 |    89.58 |     100 |   94.88 | 
+  character.caching.ts                 |   94.23 |     87.5 |     100 |   94.23 | 21-22,44
+  comic.caching.ts                     |   94.44 |     87.5 |     100 |   94.44 | 28-29,46
+  creator.caching.ts                   |   93.75 |     87.5 |     100 |   93.75 | 20-21,41
+  event.caching.ts                     |   94.33 |     87.5 |     100 |   94.33 | 22-23,45
+  serie.caching.ts                     |   94.33 |     87.5 |     100 |   94.33 | 22-23,45
+  storie.caching.ts                    |   98.11 |      100 |     100 |   98.11 | 45
+ guerras_secretas/src/middlewares      |    72.6 |    33.33 |     100 |    72.6 | 
+  error.ts                             |     100 |    33.33 |     100 |     100 | 9-10                          
+  validate-admin.ts                    |    64.7 |       25 |     100 |    64.7 | 19,21-26,28-32
+  validate.ts                          |   65.21 |       50 |     100 |   65.21 | 14-21
+ guerras_secretas/src/repository       |   94.09 |      100 |   89.18 |   94.09 | 
+  character.repository.ts              |      80 |      100 |   66.66 |      80 | 22-25,28-31
+  comic.repository.ts                  |     100 |      100 |     100 |     100 | 
+  creator.repository.ts                |   83.33 |      100 |      75 |   83.33 | 20-23
+  crud.repository.ts                   |     100 |      100 |     100 |     100 | 
+  event.repository.ts                  |     100 |      100 |     100 |     100 | 
+  populate.repository.ts               |      92 |      100 |      75 |      92 | 22-23
+  serie.repository.ts                  |     100 |      100 |     100 |     100 | 
+  storie.repository.ts                 |     100 |      100 |     100 |     100 | 
+  user.repository.ts                   |     100 |      100 |     100 |     100 | 
+ guerras_secretas/src/routes           |     100 |      100 |     100 |     100 | 
+  character.routes.ts                  |     100 |      100 |     100 |     100 | 
+  comic.routes.ts                      |     100 |      100 |     100 |     100 | 
+  creator.routes.ts                    |     100 |      100 |     100 |     100 | 
+  populate.routes.ts                   |     100 |      100 |     100 |     100 | 
+  user.routes.ts                       |     100 |      100 |     100 |     100 |                               
+ guerras_secretas/src/schema           |     100 |      100 |     100 |     100 | 
+  character.schema.ts                  |     100 |      100 |     100 |     100 | 
+  comic.schema.ts                      |     100 |      100 |     100 |     100 | 
+  creator.schema.ts                    |     100 |      100 |     100 |     100 | 
+  event.schema.ts                      |     100 |      100 |     100 |     100 | 
+  populate.schema.ts                   |     100 |      100 |     100 |     100 | 
+  serie.schema.ts                      |     100 |      100 |     100 |     100 | 
+  storie.schema.ts                     |     100 |      100 |     100 |     100 | 
+  user.schema.ts                       |     100 |      100 |     100 |     100 | 
+ guerras_secretas/src/service          |   82.75 |    80.76 |   86.36 |   82.75 | 
+  character.service.ts                 |      56 |    66.66 |      50 |      56 | 18-27,30-39,45-46
+  comic.service.ts                     |     100 |      100 |     100 |     100 | 
+  creator.service.ts                   |   70.83 |      100 |      50 |   70.83 | 17-23
+  crud.service.ts                      |   97.33 |    91.66 |     100 |   97.33 | 42-43
+  populate.service.ts                  |   92.59 |    66.66 |     100 |   92.59 | 20-21
+  user.service.ts                      |    85.1 |    66.66 |     100 |    85.1 | 29-33,42-43
+ guerras_secretas/src/utils            |   98.51 |    86.04 |     100 |   98.51 | 
+  find.utils.ts                        |   98.78 |    85.71 |     100 |   98.78 | 138-139
+  key-redis.utils.ts                   |     100 |      100 |     100 |     100 | 
+  password.utils.ts                    |     100 |      100 |     100 |     100 |                               
+  request.utils.ts                     |     100 |    85.71 |     100 |     100 | 28
+  token.utils.ts                       |   92.59 |    66.66 |     100 |   92.59 | 23-24
+  url.utils.ts                         |     100 |      100 |     100 |     100 |
+ guerras_secretas/src/utils/errors     |     100 |      100 |     100 |     100 |
+  api.error.ts                         |     100 |      100 |     100 |     100 |
+  not-found.error.ts                   |     100 |      100 |     100 |     100 |
+  unauthorized.error.ts                |     100 |      100 |     100 |     100 |
+ guerras_secretas/test/character       |     100 |      100 |     100 |     100 |
+  data.character.ts                    |     100 |      100 |     100 |     100 |
+ guerras_secretas/test/config          |   85.07 |    61.53 |     100 |   85.07 |
+  seed.ts                              |   85.07 |    61.53 |     100 |   85.07 | 27-28,35-36,43-44,51-52,59-60
+ guerras_secretas/test/populate/comics |     100 |      100 |     100 |     100 |
+  data-character.comic.ts              |     100 |      100 |     100 |     100 |
+  data-comic.comic.ts                  |     100 |      100 |     100 |     100 |
+  data-creator.comic.ts                |     100 |      100 |     100 |     100 |
+  data-event.comic.ts                  |     100 |      100 |     100 |     100 |
+  data-serie.comic.ts                  |     100 |      100 |     100 |     100 |
+  data-storie.comic.ts                 |     100 |      100 |     100 |     100 |
+ guerras_secretas/test/populate/series |     100 |      100 |     100 |     100 |
+  data-character.populate.ts           |     100 |      100 |     100 |     100 |
+  data-comic.populate.ts               |     100 |      100 |     100 |     100 |
+  data-creator.populate.ts             |     100 |      100 |     100 |     100 |
+  data-event.populate.ts               |     100 |      100 |     100 |     100 |
+  data-serie.populate.ts               |     100 |      100 |     100 |     100 |
+  data-storie.populate.ts              |     100 |      100 |     100 |     100 |
+ guerras_secretas/test/user            |     100 |      100 |     100 |     100 |
+  data.user.ts                         |     100 |      100 |     100 |     100 |
+---------------------------------------|---------|----------|---------|---------|-------------------------------
+Jest: "global" coverage threshold for branches (90%) not met: 79.93%
+
+Test Suites: 8 passed, 8 total
+Tests:       26 passed, 26 total
+Snapshots:   0 total
+Time:        37.845 s
+Ran all test suites.'

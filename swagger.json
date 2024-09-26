@@ -1,0 +1,1148 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API - Marvel - desafio profissional",
+    "description": "Esta API tem como objetivo ser um intermediário entre a Marvel API e o usuário final, permitindo aos usuários explorar os personagens envolvidos, os quadrinhos que compõem a saga e mais.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "API de teste"
+    }
+  ],
+  "paths": {
+    "/populates/{id}": {
+      "post": {
+        "summary": "Popula o banco de dados com as séries da Marvel",
+        "description": "Esta rota é responsável por popular o banco de dados com as séries da Marvel",
+        "tags": ["Populate"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "examples": {
+          "id": 2063
+        },
+        "parameters":[
+      {
+        "name": "id",
+        "in": "path",
+        "description": "ID da série que deseja popular.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+        ],
+        "responses": {
+            "401": {
+            "description": "Not authenticate"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/populates/{id}?": {
+      "post": {
+        "description": "Popular as comics, characters, stories e events de uma série",
+        "summary": "Para popular as comics, characters, stories e events de uma série, passar como parâmetro na query, o que deseja popular. Exemplo: se eu quero popular uma comic, eu coloco na query comic=true",
+        "tags": ["Populate"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters":[
+      {
+        "name": "id",
+        "in": "path",
+        "description": "ID da série que deseja popular.",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+          {
+            "name": "comics",
+            "in": "query",
+            "description": "Indica se deseja popular o field das comics. Se true, field comics serão populados.",
+            "schema": {
+            "type": "boolean"
+        }
+          },
+          {
+            "name": "characters",
+            "in": "query",
+            "description": "Indica se deseja popular o field characters. Se true, o field será populado.",
+            "schema": {
+            "type": "boolean"
+        }
+          },
+            {
+            "name": "stories",
+            "in": "query",
+            "description": "Indica se deseja popular o field dos stories. Se true, o field será populado.",
+            "schema": {
+            "type": "boolean"
+        }
+          },
+          {
+            "name": "events",
+            "in": "query",
+            "description": "Indica se deseja popular o field events. Se true, o field será populado.",
+            "schema": {
+            "type": "boolean"
+        }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+            "500": {
+            "description": "Internal Server Error"
+          },
+            "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/users/auth": {
+      "post": {
+        "summary": "Autentica usuário",
+        "description": "Realiza a autenticação do usuário",
+        "tags": ["Users"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "email": "superAdmin@gmail.com",
+                "username": "superAdmin",
+                "password": "admin"
+              }
+            }
+          }
+      },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },  
+          "400": {
+            "description": "Bad Request - Dados inválidos"
+          }
+        }
+      }
+    },
+    "/users":{
+      "post": {
+        "summary": "Cadastro de novo usuário",
+        "description": "Esta rota é responsável por cadastrar um novo usuário",
+        "tags": ["Users"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "email": "example1@gmail.com",
+                "username": "username1",
+                "password": "password1",
+                "isAdmin": "false"
+              }
+            }
+          }
+        },
+        "responses": {
+            "401": {
+            "description": "Not authenticate"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "get":{
+        "summary": "Procura todos os users",
+        "description": "Retorna todos os users cadastrados",
+        "tags": ["Users"],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Users"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}":{
+      "get": {
+        "summary": "Procura user",
+        "description": "Procura um user por id",
+        "tags": ["Users"],
+        "parameters":[{
+          "name":"id",
+          "in":"path",
+          "description": "Id para busca",
+          "required": true
+        }],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put":{
+        "summary": "Atualiza um user",
+        "description": "Atualiza um user por id",
+        "tags": ["Users"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Id do user a ser atualizado",
+          "required": true
+        }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "example": {
+                "id": 1,
+                "description": "description"
+              }
+            }
+          }
+        }
+      },
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+    },
+    "/{collection}?":
+    {
+      "get": {
+        "summary": "Permite que seja realizada qualquer busca ao banco de dados",
+        "description": "Passe o nome da collection que deseja realizar a pesquisa (Ex: comics, characters, etc). Em seguida, passe o filtro de consulta desejado (Ex: name=Beyonder). Obs: permite a consulta utilizando condicionais (Ex: eq, ne, gt) e ordenação (Ex: asc e desc). Abaixo, alguns exemplos de pesquisa que podem ser realizadas",
+        "tags": ["Filter"],
+        "parameters":[{
+          "name":"collection",
+          "in":"path",
+          "description": "Nome da collection",
+          "required": true
+        },
+        {
+          "name": "name",
+          "in":"query",
+          "description": "Consulta a ser realizada"
+        },
+        {
+          "name": "firstName",
+          "in":"query",
+          "description": "Consulta a ser realizada"
+        }],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    } ,
+    "/characters": {
+      "post": {
+        "summary": "Cadastro de personagem",
+        "description": "Esta rota é responsável por cadastrar um novo personagem",
+        "tags": ["Characters"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Character"
+              },
+              "example": {
+                "id": 1,
+                "name": "Another hero",
+                "description": "description",
+                "resourceURI": "resource1",
+                "thumbnail": {
+                  "path": "https://anotherhero.com",
+                  "extension": "jpg"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "400": {
+            "description": "Bad Request - Dados inválidos"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Character"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Procura todos os personagens",
+        "description": "Retorna todos os personagens cadastrados",
+        "tags": ["Characters"],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Character"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/characters/{id}": {
+      "get": {
+        "summary": "Procura personagem",
+        "description": "Procura um personagem por id",
+        "tags": ["Characters"],
+        "parameters":[{
+          "name":"id",
+          "in":"path",
+          "description": "Id para busca",
+          "required": true
+        }],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Character"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put":{
+        "summary": "Atualiza um personagem",
+        "description": "Atualiza um personagem por id",
+        "tags": ["Characters"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Id do personagem a ser atualizado",
+          "required": true
+        }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Character"
+              },
+              "example": {
+                "id": 1,
+                "description": "description"
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Character"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Exclui um personagem",
+        "description": "Exclui um personagem por id",
+        "tags": ["Characters"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Id do personagem a ser excluído",
+          "required": true
+        }],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "204": {
+            "description": "No content"
+          }
+      }
+    }
+    },
+    "/characters/{id}/comics": {
+      "get": {
+        "summary": "Procura as comics que um personagem apareceu",
+        "description": "Procura as comics que um personagem apareceu",
+        "tags": ["Characters"],
+        "parameters":[{
+          "name":"id",
+          "in":"path",
+          "description": "Id para busca",
+          "required": true
+        }],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Character"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/characters/{id}/series": {
+      "get": {
+        "summary": "Procura as séries que um personagem apareceu",
+        "description": "Procura as séries que um personagem apareceu",
+        "tags": ["Characters"],
+        "parameters":[{
+          "name":"id",
+          "in":"path",
+          "description": "Id para busca",
+          "required": true
+        }],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Character"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/characters/{id}/thumbnail": {
+      "get": {
+        "summary": "Procura as thumbnails de um personagem",
+        "description": "Procura as thumbnails de um personagem",
+        "tags": ["Characters"],
+        "parameters":[{
+          "name":"id",
+          "in":"path",
+          "description": "Id para busca",
+          "required": true
+        }],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Character"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/comics": {
+      "post": {
+        "summary": "Cadastro de comics",
+        "description": "Esta rota é responsável por cadastrar uma nova comic",
+        "tags": ["Comics"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comic"
+              },
+              "example": {
+                "id": 1,
+                "digitalId": 2,
+                "title": "title",
+                "issueNumber": 3,
+                "isbn": "isbn",
+                "pageCount": 123, 
+                "resourceURI": "resource1",
+                "thumbnail": {
+                  "path": "https://anotherhero.com",
+                  "extension": "jpg"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Comic"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Procura todos as comics",
+        "description": "Retorna todos as comics cadastrados",
+        "tags": ["Comics"],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Comic"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/comics/{id}":{
+       "get": {
+        "summary": "Procura comics",
+        "description": "Procura uma comic por id",
+        "tags": ["Comics"],
+        "parameters":[{
+          "name":"id",
+          "in":"path",
+          "description": "Id para busca",
+          "required": true
+        }],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Comic"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put":{
+        "summary": "Atualiza uma comic",
+        "description": "Atualiza uma comic por id",
+        "tags": ["Comics"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Id do personagem a ser atualizado",
+          "required": true
+        }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comic"
+              },
+              "example": {
+                "id": 1,
+                "description": "description"
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Comic"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Exclui uma comic",
+        "description": "Exclui uma comic por id",
+        "tags": ["Comics"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Id da comic a ser excluída",
+          "required": true
+        }],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "204": {
+            "description": "No content"
+          }
+      }
+    }
+    },
+    "/creators":{
+      "post": {
+        "summary": "Cadastro de criadores",
+        "description": "Esta rota é responsável por cadastrar um novo criador",
+        "tags": ["Creators"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Creator"
+              },
+              "example": {
+                "id": 1,
+                "firstName": "Creator1",
+                "lastName": "LastName1",
+                "resourceURI": "resource1",
+                "thumbnail": {
+                  "path": "https://anotherhero.com",
+                  "extension": "jpg"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+           "400": {
+            "description": "Bad Request - Dados inválidos"
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Creator"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Procura todos os criadores",
+        "description": "Retorna todos os criadores cadastrados",
+        "tags": ["Creators"],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Creator"
+                  }
+                }
+              }
+            }
+          }
+        }
+    }
+    
+    },
+    "/creators/{id}": {
+      "get": {
+        "summary": "Procura um criador",
+        "description": "Procura uma criador por id",
+        "tags": ["Creators"],
+        "parameters":[{
+          "name":"id",
+          "in":"path",
+          "description": "Id para busca",
+          "required": true
+        }],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Creator"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put":{
+        "summary": "Atualiza dados de um criador",
+        "description": "Atualiza dados de um criador por seu id",
+        "tags": ["Creators"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Id do criador a ser atualizado",
+          "required": true
+        }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Creator"
+              },
+              "example": {
+                "id": 1,
+                "description": "description"
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Creator"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Exclui um criador",
+        "description": "Exclui um criador por id",
+        "tags": ["Creators"],
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "description": "Id do criador a ser excluído",
+          "required": true
+        }],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "204": {
+            "description": "No content"
+          }
+      }
+    }
+    },
+    "/creators/{id}/comics": {
+      "get": {
+        "summary": "Procura as comics de um determinado criador",
+        "description": "Procura todas as comics feitas por um determinado criador",
+        "tags": ["Creators"],
+        "parameters":[{
+          "name":"id",
+          "in":"path",
+          "description": "Id para busca",
+          "required": true
+        }],
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Comic"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "email": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "isAdmin": {
+            "type": "boolean"
+          }
+        },
+        "required": ["email", "username", "password", "isAdmin"]
+      },
+      "Character": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "modified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "resourceURI": {
+            "type": "string"
+          },
+          "thumbnail": {
+            "type": "object"
+          },
+          "comics": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "stories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        },
+        "required": ["name", "resourceURI", "thumbnail"]
+      },
+      "Comic": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "digitalId":{
+            "type": "number"
+          },
+          "title": {
+            "type":"string"
+          },
+          "issueNumber": {
+            "type": "number"
+          },
+          "variantDescription": {
+            "type": "string"
+          },
+          "modified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isbn": {
+            "type": "string"
+          },
+          "upc":{
+            "type": "string"
+          },
+          "diamondCode": {
+            "type": "string"
+          },
+          "ean": {
+            "type": "string"
+          },
+          "issn": {
+            "type": "string"
+          },
+          "format": {
+            "type": "string"
+          },
+          "resourceURI": {
+            "type": "string"
+          },
+          "textObjects": {
+            "type": "object"
+          },
+          "dates":{
+            "type": "object"
+          },
+          "prices": {
+            "type":"object"
+          },
+          "thumbnail": {
+            "type": "object"
+          },
+          "images":{
+            "type": "object"
+          },
+          "creator": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "characters": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "stories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "required": ["digitalId", "title", "issueNumber", "isbn", "pageCount", "resourceURI", "thumbnail"]
+      }
+      },
+      "Creator": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "firstName":{
+            "type": "string"
+          },
+          "middleName": {
+            "type":"string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "suffix": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "modified": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "resourceURI": {
+            "type": "string"
+          },
+          "thumbnail": {
+            "type": "object"
+          },
+          "comics": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "stories": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "series": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "required": ["firstName", "lastName", "resourceURI", "thumbnail"]
+      }
+      }
+    },
+    "securitySchemes":{
+      "bearerAuth":{
+      "type": "http",
+      "scheme":"bearer",
+      "bearerFormat": "JWT"
+    }
+    }
+  }
+}
+
